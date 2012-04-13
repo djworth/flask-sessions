@@ -4,7 +4,10 @@ import cPickle as pickle
 from flask.session import SessionInterface
 from sessions.backends import SessionBase, FLASK_SESSION_COOKIE_NAME
 
-import redis.client
+try:
+    import redis.client
+except ImportError, ie:
+    print "Unable to import a redis client.  Make sure you have a proper redis client installed."
 
 def get_redis_client():
     client = redis.client.Redis()
